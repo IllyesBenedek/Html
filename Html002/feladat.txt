@@ -1,0 +1,12 @@
+1. A adat.txt állomány tartalmát illessze be a HTML oldal törzs részébe.
+2. Állítsa be az oldalt magyar nyelvűre.
+3. Állítsa be, hogy a böngészőfülön a „Két fűzfa” felirat jelenjen meg.
+4. Állítson be a szöveg előtt egyes szintű fejezetcímet, „Két fűzfa” tartalommal.
+5. A három bekezdést jelölje HTML elemmel, bekezdésnek.
+6. A bekezdéseknek a következő címet adja, kettes fejezetcímmel:
+a. 1 bekezdés: A jövedelem
+b. 2 bekezdés: A kollégium
+c. 3 bekezdés: Az orákulum
+7. A „bevette magát” szöveget, a harmadik bekezdésben, jelölje meg kiemeltnek.
+8. A második bekezdésben a „időszerint” szót, jelölje meg dőlt szövegnek.
+9. A HTML forráskódjában, megjegyzésbe, írja, a nevét és az aktuális dátumot.
