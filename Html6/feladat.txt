@@ -1,0 +1,16 @@
+1.Állítsa be az oldal nyelvét magyarra.
+2. Állítsa be, hogy a böngésző fülön a HP-UX felirat jelenjen meg.
+3. A weblap tetején,
+a. az első bekezdés előtt
+b. legyen egy HP-UX fejezetcím, amit egyesszintűnek jelöl.
+4. Minden fejezet előtt
+a. legyen egy kettes szintű fejezetcím
+b. tartalma a fejezet előtti megjegyzés szövege
+5. A „A HP-UX” megjegyzéssel ellátott bekezdésben:
+a. jelölje kiemeltnek a Hewlett Packard Unix szöveget.
+b. A HP-UX szöveget jelölje rövidítésnek.
+6. A három bekezdésnek adjon kettes szintű fejezetcímet.
+a. A cím a bekezdés előtti megjegyzésbe tett szöveg.
+7. A HTML forráskódjában, megjegyzésbe, írja, a nevét és az aktuális dátumot.
+8. Az első bekezdésben a „Unix operációs” szöveg legyen félkövérnek jelölve.
+9. Az utolsó bekezdésben a „VxFS-t” szöveg legyen dőltnek jelölve.
