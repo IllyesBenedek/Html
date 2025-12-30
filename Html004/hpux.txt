@@ -1,0 +1,7 @@
+A HP-UX a Hewlett Packard Unix rövidítése, egy kereskedelmi 
+Unix operációs rendszer, amit a Unix System V rendszeren 
+alapszik. 
+
+Támogatott platformok:
+HP 9000
+HP Integral PC
