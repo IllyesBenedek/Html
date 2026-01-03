@@ -1,0 +1,10 @@
+Adott a következő lista:
+
+Lada
+Ford
+Opel
+Citroen
+Fiat
+Mazda
+Porsche
+Peugeot
