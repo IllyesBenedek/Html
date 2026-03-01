@@ -1,0 +1,18 @@
+1. Állítsa be az oldal nyelvét magyarra.
+2. Állítsa be, hogy a böngésző fülön a Haarlem felirat jelenjen meg.
+3. A weblap tetején,
+a. legyen az első cím egyes szintű fejezetcím
+4. Az egyesszintű fejezetcím után
+a. az első címet követő bekezdést
+b. másolja az első cím után
+c. jelölje HTML bekezdésnek
+5. Ezt követően, a második címet másolja a weblapra
+a. Állítsa be, kettes szintű fejezetcímnek
+6. Ezt követően, a második cím után bekezdést
+a. másolja a weblapra
+b. jelölje HTML bekezdésnek
+7. Végül a harmadik címet is másolja weblapra
+a. Jelölje kettes szintű fejezetcímnek
+8. A harmadik cím után másolja be az URL-t.
+a. Az URL-t is jelölje bekezdésnek.
+9. Az egész weblapot tegye egy div elembe.

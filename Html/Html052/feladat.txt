@@ -1,0 +1,15 @@
+1. Állítson be olyan karakterkódolás, ami lehetővé teszi az összes magyar ékezetes megjelenítését.
+2. Az oldal nyelvét állítsa magyar nyelvre.
+3. A böngésző fülön a „vi” szó jelenjen meg.
+4. Keresse meg a következő megjegyzéseket: „A vi”, „A vim”.
+a. A megjegyzések alatti bekezdéseket jelölje HTML bekezdésnek.
+5. Keresse meg a következő megjegyzéseket újból: „A vi”, „A vim”.
+a. A bekezdések előtt legyen egy kettes szintű fejezetcím
+b. tartalmuk, a bekezdés előtt található megjegyzés tartalma.
+6. Keresse meg a „vi változatok” megjegyzés alatti felsorolást.
+a. Jelölje számozatlan listának.
+7. A weblap tetején legyen egy „vi szövegszerkesztő” szöveg
+a. A szöveget jelölje egyes szintű címsornak.
+8. A „vi változatok” bekezdés alatt van egy ugyanilyen szöveg.
+a. Jelölje kettes című fejezetcímnek.
+9. Az első bekezdésben „képernyő-orientált” szöveg legyen kiemeltnek jelölve.

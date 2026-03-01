@@ -1,0 +1,15 @@
+A weblap tetején hozzon létre megjegyzést, ahova saját nevét, csoportját és az aktuális dátumot írja.
+Állítsa be az oldal nyelvét magyarra.
+Állítson be UTF-8 kódolást.
+A böngésző címsorában/fülén a „Gomba” szó jelenjen meg.
+A div elem számára állítson be container osztályjelölőt. A következő feladatokat ezen belül oldja meg.
+A „Gombák” megjegyzést követő szöveget jelölje egyesfejezetcímnek.
+A „A gombákról” megjegyzés alatti címszöveget jelölje kettes szintű fejezetcímnek.
+A „Leírás a gombákról” megjegyzést követő bekezdést jelölje bekezdésnek.
+A „Rokon tulajdonságok” megjegyzést követő címszöveget jelölje kettes fejezetcímnek.
+A „Rokon lista” megjegyzés után következő 7 sort jelölje számozatlan listának.
+Minden sor külön listaelemnek legyen jelölve.
+A számozatlan listának állítson be „gomblista” osztályjelölőt.
+A „Névjegy” megjegyzést követően készítsen egy section elemet.
+A section elembe írja be saját nevét, a csoportját és az aktuális dátumot.
+A listán belül az „L-lizin” szót jelölje félkövérnek.

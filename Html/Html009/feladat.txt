@@ -1,0 +1,12 @@
+1. Készítsen egy weboldalt had.html néven.
+2. Állítsa be a weboldal nyelvét magyarra.
+3. Oldal kódolása legyen utf-8.
+4. A böngésző fülön a „Had” szó jelenjen meg.
+5. A fenti szöveget illessze be a weblap törzs részére.
+6. Van három bekezdés külön külön címekkel:
+a. Telep, Szomszédok, Hadcsapat
+b. A három címet tegye kettes szintű fejezetcímmé.
+7. A weblap tetejére a következő címet állítsa be, egyes szintű fejezetcímmé:
+a. A láthatatlan csillag.
+8. A cím alatti bekezdéseket tegye p elemek közzé.
+9. A weblap tetején legyen megjegyzésben a neve és a készítés dátuma.

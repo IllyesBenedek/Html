@@ -1,0 +1,9 @@
+A weblap forráskódjában, megjegyzés formájában, írja saját nevét és a készítés dátumát.
+Az oldal számára állítson be magyar nyelvet.
+Az oldal karakterkódolását állítsa be UTF-8-ra.
+A böngésző címsorába a „Túrószelet” szó jelenjen meg.
+A „Túrószelet” szót a weblap tetején jelölje meg 1-s fejezetcíművé.
+A hozzávalók és az elkészítés megjegyzés feletti „Hozzávalók” és „Elkészítés” szavakat jelölje meg 2-s fejezetcíműnek.
+A hozzáválók megjegyzés alatti 7 darab hozzávalót jelölje meg számozatlan listának.
+Az elkészítés megjegyzés alatti 2 bekezdést, jelölje meg bekezdésnek.
+Az oldal alján a „Wikibooks” szó legyen kiemeltnek jelölve. (a mintán ez nem látszik)

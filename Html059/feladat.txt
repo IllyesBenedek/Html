@@ -1,0 +1,10 @@
+Állítsa be a weboldal kódolását utf-8-ra.
+Állítsa be, hogy a böngésző fülein a „Roborálás” szó jelenjen meg.
+A „Roboráló gyügynövények” szöveget az oldal tetején jelölje egyes szintű fejezetcímnek.
+A „Csipkebogyó” és a „Csalán” megjegyzések alatti bekezdéseket, állítsa be bekezdésnek.
+A „Csipkebogyó” és a „Csalán” megjegyzések alatt, hozzon létre kettes szintű fejezetcímeket.
+Tartalma a megjegyzésben szerplő szöveg.
+Az oldal nyelvét állítsa magyar nyelvre.
+A „Növények listája” megjegyzés alatt a négy növénynevet tegye számozatlan listába.
+A „sources” megjegyzés alatt a „Forrás” szöveget jelölje kettes szintű fejezetcímnek.
+Az első bekezdésben a „Roboráló” szó legyen kiemeltnek jelölve.

@@ -1,0 +1,10 @@
+1. Az oldal számára állítson be magyar nyelvet.
+2. Az oldal karakterkódolása UTF-8 legyen.
+3. A böngésző címsorában az fdisk szó jelenjen meg.
+4. Az fdisk megjegyzés alatt írjon be fdisk szöveget.
+a. a szöveget jelölje egyes szintű címsorként.
+5. A „kapcsolók” megjegyzés után az egész bekezdést jelölje egyetlen bekezdésnek.
+6. A ”-b„ szövegtől a -u, --units[=egység] szövegig jelölje számozott listának.
+7. Az „az fdisk program” megjegyzés alatti bekezdést, jelölje bekezdésnek
+8. Az „az fdisk program” megjegyzés alatt közvetlenül, hozzon létre egy kettes szintű fejezetcímet. Tartalma megjegyzés szövegével azonos.
+9. A „BSD partíciós táblákhoz” szöveg az első bekezdésben legyen kiemeltnek jelölve.

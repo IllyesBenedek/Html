@@ -1,0 +1,9 @@
+Készítsen egy weblapot.
+A weblap nyelve legyen magyar.
+A weblap kódolása legyen utf-8.
+A böngészőfülön megjelenő szöveg legyen „Autók”.
+A weblap tetején legyen egyes fejezetcímben a következő szöveg: „Autók”.
+A egyes szintű fejezetcím alatt, legyen kettes szintű fejezetcímmel a következő: „Márkák”.
+Tegye a listát a weblapba, jelölje HTML listának.
+A weblap tetején megjegyzésben írja saját nevét, csoportját és az aktuális dátumot.
+A listában az „Opel” szót jelölje kiemeltnek.
