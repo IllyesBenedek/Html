@@ -1,0 +1,16 @@
+1. Állítsa be az oldal nyelvét magyarra.
+2. A weboldal számára olyan karakterkódolást állítson be, amellyel az összes magyar ékezetes megjeleníthető.
+3. A böngésző fülön a „MIPS” szó jelenjen meg.
+4. Van négy bekezdés
+a. minden bekezdés legyen bekezdésnek jelölve
+5. A bekezdések előtt legyen egy kettes szintű fejezetcím
+a. tartalmuk, a bekezdés előtt található megjegyzés tartalma.
+6. A negyedik bekezdésben
+a. „Digital Equipment Corporation (DEC)”-től a „Tandem Computers”-ig,
+b. jelölje meg számozatlan listának
+c. a csillagokat távolítsa el
+d. a 3-dik bekezdésben ugyanígy
+7. A lap tetején készítsen, egyes szintű fejezetcímet
+a. tartalma „MIPS”
+8. A HTML forráskódjában, megjegyzésbe, írja, a nevét és az aktuális dátumot.
+9. Az első bekezdésben a „RISC utasításkészletű” szöveg legyen félkövérnek jelölve.

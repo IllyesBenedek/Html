@@ -1,0 +1,12 @@
+Állítsa be az oldal nyelvét magyarra.
+Az weblap karakterkódolását állítsa utf-8-ra.
+A böngészőben megjelenő szöveg „Repülőgép” legyen.
+A weblap tetején a „Repülőgépek” szövegeket jelölje egyes szintű fejezetcímnek.
+A „Cessna” és a „Stearman” megjegyzések alatti mondatokat:
+Jelölje bekezdésnek
+A „Cessna” és a „Stearman” megjegyzések alatti bekezdéseket:
+Lássa el kettes szintű fejezet címmel
+Tartalm a megjegyzésben lévő szöveg.
+A „kisgépek listája” megjegyzés alatti listát jelöje számozott listának.
+A „sources” megjegyzés alatta a „Források:” szöveget tegye megjegyzésbe.
+Az első bekezdésben a „Cessna” szó legyen kiemeltnek jelölve.
