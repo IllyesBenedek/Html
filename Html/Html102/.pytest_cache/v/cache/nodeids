@@ -1,0 +1,11 @@
+[
+  "test_index.py::test_feladat_01_magyar_nyelv",
+  "test_index.py::test_feladat_02_halozat_cim",
+  "test_index.py::test_feladat_03_utf8",
+  "test_index.py::test_feladat_04_h1_fejezetcim",
+  "test_index.py::test_feladat_05_figure1_helye",
+  "test_index.py::test_feladat_06_lista_kepek",
+  "test_index.py::test_feladat_07_bekezdesek_es_lista",
+  "test_index.py::test_feladat_08_h2_fejezetcimek",
+  "test_index.py::test_feladat_09_lablec_blokk"
+]
