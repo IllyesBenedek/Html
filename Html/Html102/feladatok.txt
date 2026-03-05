@@ -1,0 +1,16 @@
+1. A weboldal számára állítson be magyar nyelvet.
+2. A böngésző fülén a „Hálózat” szöveg jelenjen meg.
+3. Állítson be utf-8 kódolást.
+4. A body tag után az „A hálózat” szöveget jelölje meg
+a. legen egyes szintű fejezetcím
+5. A „Figure 1” feliratú képet
+a. illessze a „Helyi hálózatok” megjegyzéssel ellátott bekezdés végére.
+6. A „Figure 2”-től a „Figure 6”-ig megjelölt képeket,
+a. szúrja be a lista elemek tartalmainak végére.
+7. Minden bekezdés legyen HTML bekezdésnek jelölve.
+a. A „Szimbólumok” megjegyzéssel ellátott bekezdésben
+b. a lista is legyen benne a bekezdésben.
+8. Minden bekezdésnek adjon egy kettes szintű fejezetcímet:
+a. A fejezetcím tartalma a bekezdés előtti megjegyzés szövege.
+9. A weblap alján hozzon létre egy általános blokk elemmel egy részt:
+a. Tartalma saját nevét és a készítés dátuma legyen.
