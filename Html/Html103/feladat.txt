@@ -1,0 +1,17 @@
+A weboldal számára állítson be magyar nyelvet.
+A böngésző fülén a „Arduino” szöveg jelenjen meg.
+Állítson be utf-8 kódolást.
+A body tag után az „Az Arduino” szöveget jelölje meg
+legen egyes szintű fejezetcím
+A „Arduino Pro Micro” feliratú képet
+illessze a „Az Arduino” megjegyzéssel ellátott bekezdés végére.
+A kép a HTML bekezdésen belül szerepeljen
+A „Arduino Robot” feliratú képet
+illessze a „Arduino Board” megjegyzéssel ellátott bekezdés végére.
+A kép a HTML bekezdésen belül szerepeljen
+A „Arduino Uno” feliratú képet
+illessze a „Shield” megjegyzéssel ellátott bekezdés végére.
+A kép a HTML bekezdésen belül szerepeljen
+Minden bekezdésnek adjon egy kettes szintű fejezetcímet
+A fejezetcím tartalma a bekezdés előtti megjegyzés szövege.
+A „Intel Curie” szöveget jelölje dőltnek.
