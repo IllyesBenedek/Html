@@ -1,0 +1,9 @@
+Állítsa be az oldal nyelvét magyarra.
+Állítsa be az oldal kódolását utf-8-ra.
+A böngésző fülön a VLAN szó jelenjen meg.
+A LAN megjegyzés alatt a LAN szót jelölje egyes szintű fejezetcímnek.
+A Hálózat ábra megjegyzés alatt szúrja be az images/feladat_104_halozat.png képet.
+A „Hálózat leírása” megjegyzés alatti szöveget jelölje bekezdésnek, a következő megjegyzésig.
+Az „IP címek” megjegyzés alatt az „IP címek” szöveget jelölje kettes fejezetcímmel.
+Az „IP címek listája” megjegyzés alatti 5 sort jelölje számozatlan listát.
+Az egy sorokat jelölje listaelemnek.
