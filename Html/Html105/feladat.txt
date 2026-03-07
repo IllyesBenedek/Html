@@ -1,0 +1,9 @@
+Állítsa be az oldal nyelvét magyarra.
+Állítsa be, hogy a böngészőfülön a „Csengő” szó jelenjen meg.
+A header elemek között jelenítse meg a csengo.png képet.
+A header elemek közötti csengo.png kép ha nem jeleníthet meg, a „Csengő” szó jelenjen meg helyette.
+A weblap tetején a „Csnegő iroda” címet jelölje 1-s szintű fejezetcímnek.
+A második bekezdésben a „hálózat leírása” megyjegyzésben lévő szöveg utáni sorban jelenítse meg a halozat.png képet.
+A halozat.png kép, ha nem jeleníthető meg, akkor a „Hálózat” szó jelenjen meg a weblapon.
+A harmadik bekezdésben a hálózati cím legyen félkövérnek jelölve.
+A végponti eszközöket jelölje meg számozatlan listának.
