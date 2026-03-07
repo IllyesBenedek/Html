@@ -1,0 +1,10 @@
+Állítson be a HTML oldal számára magyar nyelvet.
+Az oldal kódolása utf-8 legyen.
+A böngésző fülön megjelenő szöveg Tru64 legyen.
+A lap tetején a „Tru64 UNIX” szöveg egyes szintű címsorként legyen megjelölve.
+A címsort követő bekezdés legyen bekezdésnek jelölve.
+A bekezdésben a „Tru64 UNIX” szöveg legyen kiemeltnek jelölve.
+A táblázatot egészítse ki egy újabb sorral.
+Tartalma lentebb található
+A „Hewlett-Packard” szöveg legyen kiemeltnek jelölve.
+A weblap tetején megjegyzésbe írja saját nevét és a készítés dátumát
