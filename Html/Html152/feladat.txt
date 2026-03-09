@@ -1,0 +1,9 @@
+Készítsen egy weboldalt, állítson be a HTML oldal számára magyar nyelvet.
+Az oldal kódolása utf-8 legyen.
+A böngésző fülön megjelenő szöveg Verseny legyen.
+Készítse el az ábrán látható táblázatot.
+Állítsa be a táblázatban látható oszlopnyúlást.
+Állítsa be a táblázatban látható sornyúlást.
+A táblázat előtt, egyes szintű fejezetcímmel jelenítse meg a „Verseny” szót.
+A weblap alján hozzon létre általános blokk elemmel egy sort, ahova nevét és a készítés dátumát írja.
+A weblap tetején megjegyzésben szerepeljen a neve és a készítés dátuma.
