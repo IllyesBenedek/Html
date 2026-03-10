@@ -1,0 +1,11 @@
+Készítsen egy weboldalt, állítson be a HTML oldal számára magyar nyelvet.
+Az oldal kódolása utf-8 legyen.
+A böngésző fülön megjelenő szöveg Verseny legyen.
+Készítse el az ábrán látható táblázatot.
+Állítsa be a táblázatban látható oszlopnyúlást.
+A táblázat előtt állítsa be egyes szintű fejezetcímmel a következő szöveget:
+Pénzek
+A táblázat számára állítson be feliratot.
+Tartalma: „Kerekítés”
+A weblap alján hozzon létre egy dobozt, amelyben tárolja a nevét és készítés dátumát.
+A weblap alján a saját nevét jelölje dőltnek.
