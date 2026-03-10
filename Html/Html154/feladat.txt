@@ -1,0 +1,10 @@
+Készítsen egy weboldalt, állítson be a HTML oldal számára magyar nyelvet.
+Az oldal kódolása utf-8 legyen.
+A böngésző fülön megjelenő szöveg Verseny legyen.
+Készítse el az ábrán látható táblázatot.
+Állítsa be a táblázatban látható oszlopnyúlást.
+Állítsa be a táblázatban látható sornyúlást.
+Készítsen egy leírást a táblázatról, a táblázat előtt p elem segítségével.
+Tartalma: Kötött pályás jármű árlista.
+Készítsen egy általános HTML elemmel egy láblécet, ahol saját nevét és a készítés dátumát megadja.
+A saját nevét és a készítés dátumát, tegye megjegyzésbe a weblap tetején.
