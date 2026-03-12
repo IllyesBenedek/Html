@@ -1,0 +1,6 @@
+Készítsen egy weboldalt, állítson be a weboldal nyelvét magyarra.
+Állítsa be az oldal kódolását utf-8 értékre.
+A böngésző fülön megjelenő szöveg „Termékek” legyen.
+Készítse el az ábrán látható táblázatot.
+Állítsa be a táblázatban látható sornyúlást.
+A táblázat előtt, egyes szintű fejezetcímmel a „Termékek” szó jelenjen meg.
