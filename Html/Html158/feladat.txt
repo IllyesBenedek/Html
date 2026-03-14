@@ -1,0 +1,6 @@
+Készítsen egy weboldalt, állítson be a weboldal nyelvét magyarra.
+Állítsa be az oldal kódolását utf-8 értékre.
+A böngésző fülön megjelenő szöveg „Fizetés” legyen.
+Készítse el az ábrán látható táblázatot.
+Állítsa be a táblázatban látható oszlopnyúlást.
+A táblázat előtt, egyes szintű fejezetcímmel a „Fizetés” szó jelenjen meg.
