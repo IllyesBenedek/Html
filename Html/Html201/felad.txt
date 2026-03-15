@@ -1,0 +1,10 @@
+Készítsen weboldalt dark.html néven.
+A weblap nyelvét állítsa magyarra.
+Az oldal karakterkódolása utf-8 legyen.
+A böngésző fülön a „Dark” szó jelenjen meg.
+A weblap tetején egyes szintű fejezet címmel a „Sötét anyag” szöveg szerepeljen.
+A „sötét anyag” szöveget jelölje hiperhivatkozásnak.
+A hivatkozás célja legyen a következő cím:
+https://en.wikipedia.org/wiki/Dark_matter
+A „sugárzást” szó legyen kiemeltnek jelölve.
+Az oldal hozzon létre egy lábrész, ahol a neve és készítés dátuma szerepel.
