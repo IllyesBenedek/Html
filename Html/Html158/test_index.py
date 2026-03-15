@@ -32,37 +32,39 @@ def test_3_title():
     print("PASS: 3. feladat – title helyes.")
 
 
-# 4. feladat – táblázat létezik
-def test_4_table_exists():
-    table = soup().find("table")
-    assert table is not None, "FAIL: 4. feladat – A táblázat nem található."
-    print("PASS: 4. feladat – táblázat megtalálva.")
+# 4. feladat – H1 létezik és 'Fizetés'
+def test_4_h1():
+    h1 = soup().find("h1")
+    assert h1 is not None, "FAIL: 4. feladat – Nincs H1 cím."
+    assert h1.text.strip() == "Fizetés", "FAIL: 4. feladat – A H1 szövege nem 'Fizetés'."
+    print("PASS: 4. feladat – H1 helyes.")
 
 
-# 5. feladat – padding
-def test_5_padding():
-    html = load_html()
-    assert "padding" in html, "FAIL: 5. feladat – Nincs padding beállítva."
-    print("PASS: 5. feladat – padding beállítva.")
-
-
-# 6. feladat – táblázat tartalma
-def test_6_table_content():
+# 5. feladat – táblázat tartalma (az ábra alapján)
+def test_5_table_content():
     rows = soup().find_all("tr")
+    assert len(rows) >= 5, "FAIL: 5. feladat – A táblázat nem tartalmazza az összes sort."
 
     expected = [
-        ["Fizetés"],  # 1. sor
-        ["Fizetési mód", "Status", "Határidő"],  # 2. sor
-        ["Készpénz", "Sikeres", "2023.11.01"],   # 3. sor
-        ["Banki átutalás", "Folyamatban", "2023.11.05"],  # 4. sor
-        ["Paypal", "Sikeres", "2023.11.03"],  # 5. sor
-        ["Hitelkártya", "Sikertelen", "2023.11.02"]  # 6. sor
+        ["Fizetés"],  # 1. sor: címsor (th colspan=3)
+        ["Fizetési mód", "Státusz", "Határidő"],
+        ["Készpénz", "Sikeres", "2023.11.01."],
+        ["Banki átutalás", "Folyamatban", "2023.11.05."],
+        ["Paypal", "Sikeres", "2023.11.03."],
+        ["Hitelkártya", "Sikertelen", "2023.11.02."]
     ]
 
     for i, row in enumerate(expected):
         cells = rows[i].find_all(["th", "td"])
         for j, value in enumerate(row):
             assert cells[j].text.strip() == value, \
-                f"FAIL: Tartalmi hiba a(z) {i+1}. sor {j+1}. cellájában."
+                f"FAIL: 5. feladat – Tartalmi hiba a(z) {i+1}. sor {j+1}. cellájában."
 
-    print("PASS: 6. feladat – táblázat tartalma helyes.")
+    print("PASS: 5. feladat – táblázat tartalma helyes.")
+
+
+# 6. feladat – padding (oszlopnyúlás)
+def test_6_padding():
+    html = load_html()
+    assert "padding" in html, "FAIL: 6. feladat – Nincs padding beállítva."
+    print("PASS: 6. feladat – padding beállítva.")
