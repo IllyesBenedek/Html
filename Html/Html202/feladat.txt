@@ -1,0 +1,10 @@
+Készítsen weboldalt. A weblap nyelve magyar legyen.
+A weboldal kódolása utf-8 legyen.
+A böngészőben megjelenő fülön a „Cápa” szó jelenjen meg.
+A weblap tetején a egyes szintű fejezetcímmel a „Cápa” szó tegye.
+A fenti szöveget tegye egy általános blokk elembe.
+Jelölje a „megalodon” szót hiperszövegnek.
+A hiperszöveg a következő címre mutasson:
+https://hu.wikipedia.org/wiki/%C3%93ri%C3%A1sfog%C3%BA_c%C3%A1pa
+A „legnagyobb húsevő” szöveget jelölje kiemeltnek.
+Az „óriásfogú” szót jelölje dőlnek.
