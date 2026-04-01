@@ -1,0 +1,4 @@
+A szél erejével hajtott hajó a vitorlás hajó. 
+A vitorlás hajók az árbocok alapján tipizálhatók.
+Így beszélünk egy, másfél, két és három vagy sokárbocú
+vitorlásról.
