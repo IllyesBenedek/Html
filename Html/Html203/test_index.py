@@ -1,44 +1,54 @@
+from bs4 import BeautifulSoup
 import os
 
-def test_file_exists():
-    assert os.path.exists("index.html"), "index.html nem található"
-    assert os.path.exists("feladat.txt"), "feladat.txt nem található"
+HTML_FILE = "hajo.html"  # A vizsgált fájl neve
+# Ide írd be a feladatban kért pontos URL-t!
+ELVART_URL = "https://hu.wikipedia.org/wiki/Motorcsónak" 
 
-def test_utf8_encoding():
-    # Próbáljuk meg UTF-8-ként beolvasni
-    try:
-        with open("index.html", "r", encoding="utf-8") as f:
-            f.read()
-        with open("feladat.txt", "r", encoding="utf-8") as f:
-            f.read()
-    except UnicodeDecodeError:
-        assert False, "A fájl nem UTF-8 kódolású"
+def load_html():
+    with open(HTML_FILE, encoding="utf-8") as f:
+        return f.read()
 
-def test_link_present():
-    with open("index.html", "r", encoding="utf-8") as f:
-        content = f.read()
+def soup():
+    return BeautifulSoup(load_html(), "html.parser")
 
-    assert '<a href="' in content, "Nincs hivatkozás az index.html-ben"
-    assert 'motorcsónaknak</a>' in content, "A motorcsónaknak nincs linkké alakítva"
+# --- ALAPBEÁLLÍTÁSOK ---
 
-def test_correct_url():
-    with open("index.html", "r", encoding="utf-8") as f:
-        content = f.read()
+def test_1_file_exists():
+    assert os.path.exists(HTML_FILE), f"FAIL: 1. feladat – A '{HTML_FILE}' fájl nem található!"
 
-    assert 'href="https://hu.wikipedia.org/wiki/Motorcs%C3%B3nak"' in content, "Nem a megfelelő URL-re mutat a link"
+def test_2_utf8_kodolas():
+    html = load_html().lower()
+    assert '<meta charset="utf-8">' in html or '<meta charset="utf-8"/>' in html, \
+        "FAIL: 2. feladat – A karakterkódolás nem UTF-8 vagy hiányzik a meta tag."
 
-def test_no_plain_word_left():
-    with open("index.html", "r", encoding="utf-8") as f:
-        content = f.read()
+def test_3_magyar_nyelv():
+    s = soup()
+    html_tag = s.find("html")
+    assert html_tag and html_tag.get("lang") == "hu", \
+        "FAIL: 3. feladat – A weboldal nyelve nincs magyarra állítva (<html lang=\"hu\">)."
 
-    # Töröljük a linkelt változatot, és nézzük meg, maradt-e sima szó
-    cleaned = content.replace('<a href="https://hu.wikipedia.org/wiki/Motorcs%C3%B3nak">motorcsónaknak</a>', "")
-    assert "motorcsónaknak" not in cleaned, "A régi motorcsónaknak szó még szerepel link nélkül"
+# --- 203. FELADAT SPECIFIKUS TESZTEK ---
 
-def test_html_structure():
-    with open("index.html", "r", encoding="utf-8") as f:
-        content = f.read()
+def test_4_motorcsanak_link():
+    s = soup()
+    # Megkeressük a 'motorcsónaknak' szót tartalmazó linket
+    link = s.find("a", string=lambda t: t and "motorcsónaknak" in t.lower())
+    assert link is not None, "FAIL: 4. feladat – A 'motorcsónaknak' szó nincs linkké (<a>) alakítva."
+    assert link.get("href") == ELVART_URL, f"FAIL: 4. feladat – A link URL-je hibás! (Várt: {ELVART_URL})"
 
-    assert "<html" in content.lower(), "Hiányzik a <html> tag"
-    assert "<body" in content.lower(), "Hiányzik a <body> tag"
-    assert "</html>" in content.lower(), "Hiányzik a lezáró </html> tag"
+def test_5_muszaki_adatok_ellenorzese():
+    html = load_html()
+    # A képen szereplő pontos értékek keresése
+    hibak = []
+    if "4 kW-nál nagyobb" not in html:
+        hibak.append("'4 kW-nál nagyobb'")
+    if "30-40 lábnál hosszabb" not in html:
+        hibak.append("'30-40 lábnál hosszabb'")
+    
+    assert not hibak, f"FAIL: 5. feladat – Hiányzó vagy elírt adatok: {', '.join(hibak)}"
+
+def test_6_jacht_elnevezes():
+    html = load_html().lower()
+    assert "jachtnak nevezzük" in html, "FAIL: 6. feladat – A 'jachtnak nevezzük' szövegrész hiányzik vagy hibás."
+    
