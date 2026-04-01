@@ -1,0 +1,2 @@
+A gravitáció az elhajlított téridő következménye. A torzult tér az adott testhez közeledve egyre meredekebb, amit erősödő gravitációként érzékelünk.
+A testtől távolodva a téridő egyre kevésbé meredek, így a gravitációt gyengébbnek érezzük.
