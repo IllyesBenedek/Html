@@ -1,103 +1,65 @@
 import pytest
 from bs4 import BeautifulSoup
+import os
 
-def test_html_file_exists():
-    """
-    Ellenőrzi, hogy a szoliman.html fájl létezik-e.
-    """
-    try:
-        with open("szoliman.html", "r", encoding="utf-8") as f:
-            assert True
-    except FileNotFoundError:
-        assert False, "A szoliman.html fájl nem létezik."
-    
-def test_html_lang_attribute():
-    """
-    Ellenőrzi, hogy a HTML dokumentum nyelvi attribútuma helyesen van-e beállítva.
-    """
-    with open("szoliman.html", "r", encoding="utf-8") as f:
-        soup = BeautifulSoup(f, "html.parser")
-        html_tag = soup.find("html")
-        assert html_tag is not None, "A html tag hiányzik."
-        assert html_tag.get("lang") == "hu", "A nyelvi attribútum nincs 'hu'-ra állítva."
-    
-def test_title_element():
-    """
-    Ellenőrzi, hogy a title elem 'Szoliman'-ra van-e állítva.
-    """
-    with open("szoliman.html", "r", encoding="utf-8") as f:
-         soup = BeautifulSoup(f, "html.parser")
-         title_tag = soup.find("title")
-         assert title_tag is not None, "A title tag hiányzik."
-         assert title_tag.text == "Szoliman", "A title nem 'Szoliman'-ra van állítva."
+@pytest.fixture
+def html_soup():
+    path = "szoliman.html"
+    if not os.path.exists(path):
+        pytest.fail(f"{path} nem található!")
+    with open(path, "r", encoding="utf-8") as f:
+        return BeautifulSoup(f.read(), "html.parser")
 
-def test_h1_element():
-    """
-    Ellenőrzi, hogy az h1 elem jelen van-e és a tartalma "Szoliman".
-    """
-    with open("szoliman.html", "r", encoding="utf-8") as f:
-        soup = BeautifulSoup(f, "html.parser")
-        h1_tag = soup.find("h1")
-        assert h1_tag is not None, "Az h1 tag hiányzik."
-        assert h1_tag.text == "Szoliman", "Az h1 tag tartalma nem megfelelő."
+def test_01_tartalom_beillesztes(html_soup):
+    """1. Feladat: A szöveg beillesztése megtörtént."""
+    body_text = html_soup.body.get_text()
+    assert "Szolimán elkomorult" in body_text
 
-def test_paragraph_elements():
-    """
-    Ellenőrzi, hogy három bekezdés van-e.
-    """
-    with open("szoliman.html", "r", encoding="utf-8") as f:
-        soup = BeautifulSoup(f, "html.parser")
-        paragraphs = soup.find_all("p")
-        h2_tags = soup.find_all("h2")
-        assert len(paragraphs) == 3, "Három bekezdés elemnek kell lennie."
-        
-def test_paragraph_elements_and_h2_elements():
-    """
-    Ellenőrzi, hogy három bekezdés van-e és mindegyik előtt egy h2 fejléc.
-    """
-    with open("szoliman.html", "r", encoding="utf-8") as f:
-        soup = BeautifulSoup(f, "html.parser")
-        paragraphs = soup.find_all("p")
-        h2_tags = soup.find_all("h2")
-        assert len(paragraphs) == 3, "Három bekezdés elemnek kell lennie."
-        assert len(h2_tags) == 3, "Három h2 elemnek kell lennie."
-    
-        expected_headers = ["A szemrehányás", "A szentkönyv", "A leborulás"]
-        for i, h2_tag in enumerate(h2_tags):
-           assert h2_tag.text == expected_headers[i], f"A h2 fejléc tartalma a(z) {i}. indexen nem megfelelő."
+def test_02_nyelv_beallitas(html_soup):
+    """2. Feladat: Az oldal nyelve magyar (lang='hu')."""
+    html_tag = html_soup.find("html")
+    assert html_tag.get("lang") == "hu", "A nyelvi attribútum nem 'hu'."
 
-def test_first_paragraph_emphasis():
-    """
-    Ellenőrzi, hogy a 'tekintete azalatt' dőlt betűs az első bekezdésben.
-    """
-    with open("szoliman.html", "r", encoding="utf-8") as f:
-        soup = BeautifulSoup(f, "html.parser")
-        first_paragraph = soup.find_all("p")[0]
-        em_tag = first_paragraph.find("i")
-        assert em_tag is not None, "Az 'i' tag hiányzik az első bekezdésből."
-        assert em_tag.text == "tekintete azalatt", "A dőlt betűs szöveg az első bekezdésben nem megfelelő."
+def test_03_bongeszo_cim(html_soup):
+    """3. Feladat: A title elem tartalma 'Szoliman'."""
+    assert html_soup.title.text == "Szoliman", "A title nem megfelelő."
 
-def test_third_paragraph_strong_emphasis():
-    """
-    Ellenőrzi, hogy az "A szultán" szöveg kiemelt az harmadik bekezdésben.
-    """
-    with open("szoliman.html", "r", encoding="utf-8") as f:
-        soup = BeautifulSoup(f, "html.parser")
-        third_paragraph = soup.find_all("p")[2]
-        strong_tags = third_paragraph.find_all("strong")
-        assert len(strong_tags) == 2, "Két strong tagnek kell lennie a harmadik bekezdésben."
-        for strong_tag in strong_tags:
-            assert strong_tag.text == "A szultán", "A kiemelt szöveg a harmadik bekezdésben nem megfelelő."
-        
+def test_04_fo_fejezetcim(html_soup):
+    """4. Feladat: h1 fejezetcím 'Szoliman' tartalommal."""
+    h1 = html_soup.find("h1")
+    assert h1 is not None and h1.text == "Szoliman"
 
-def test_html_comment():
-    """
-    Ellenőrzi, hogy a "Vizsgafeladat" komment létezik-e a HTML forráskódban.
-    """
+def test_05_bekezdesek_szama(html_soup):
+    """5. Feladat: Pontosan három bekezdés (p) van a kódban."""
+    paragraphs = html_soup.find_all("p")
+    assert len(paragraphs) == 3
+
+def test_06_alcimek_ellenorzese(html_soup):
+    """6. Feladat: h2 alcímek szövegeinek ellenőrzése."""
+    expected = ["A szemrehányás", "A szentkönyv", "A leborulás"]
+    h2_tags = html_soup.find_all("h2")
+    assert len(h2_tags) == 3
+    for i, tag in enumerate(h2_tags):
+        assert tag.text.strip() == expected[i]
+
+def test_07_dolt_formazas(html_soup):
+    """7. Feladat: 'tekintete azalatt' dőlt betűs az első bekezdésben."""
+    p1 = html_soup.find_all("p")[0]
+    italic = p1.find("i") or p1.find("em")
+    assert italic is not None and "tekintete azalatt" in italic.text
+
+def test_08_szigorany_dupla_kiemeles(html_soup):
+    """8. Feladat: Csak akkor sikerül, ha PONTOSAN 2 darab 'A szultán' kiemelés van."""
+    p3 = html_soup.find_all("p")[2]
+    highlights = p3.find_all(["strong", "b"])
+    count = sum(1 for tag in highlights if "A szultán" in tag.text)
+    assert count == 2, f"HIBA: {count} kiemelést találtam a 2 helyett!"
+
+def test_09_komment(html_soup):
+    """9. Feladat: Megjegyzés megléte névvel és dátummal."""
     with open("szoliman.html", "r", encoding="utf-8") as f:
         content = f.read()
-        assert "<!-- Vizsgafeladat -->" in content, "A 'Vizsgafeladat' komment hiányzik a HTML kódból."
-
-if __name__ == "__main__":
-    pytest.main()
-
+        # Csak akkor megy át, ha a kommentben ott a név és a dátum is
+        assert "<!--" in content and "-->" in content
+        assert "Benedek" in content
+        assert "2026.05.01" in content
