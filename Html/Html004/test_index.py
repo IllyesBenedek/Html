@@ -1,73 +1,52 @@
+import pytest
+from bs4 import BeautifulSoup
 import os
 import re
-from datetime import datetime
 
-def test_hpux_tartalom():
-    with open('index.html', 'r', encoding='utf-8') as f:
+@pytest.fixture
+def html_soup():
+    path = "index.html"
+    if not os.path.exists(path):
+        pytest.fail(f"{path} nem található!")
+    with open(path, "r", encoding="utf-8") as f:
+        return BeautifulSoup(f.read(), "html.parser")
+
+def test_01_tartalom(html_soup):
+    assert "Hewlett Packard" in html_soup.text
+
+def test_02_nyelv(html_soup):
+    assert html_soup.html.get("lang") == "hu"
+
+def test_03_title(html_soup):
+    assert html_soup.title.text == "HP-UX"
+
+def test_04_h1(html_soup):
+    assert html_soup.find("h1").text == "HP-UX"
+
+def test_05_bekezdesek_szama(html_soup):
+    # Két fő bekezdésnek kell lennie a leírás alapján
+    assert len(html_soup.find_all("p")) == 2
+
+def test_06_rovidites(html_soup):
+    # HP 9000 rövidítésként (abbr)
+    abbr = html_soup.find("abbr")
+    assert abbr is not None and "HP 9000" in abbr.text
+
+def test_07_kiemeles(html_soup):
+    # HP Integral PC kiemelt (strong/b)
+    strong = html_soup.find(["strong", "b"])
+    assert strong is not None and "HP Integral PC" in strong.text
+
+def test_08_h2_helye_es_szovege(html_soup):
+    h2 = html_soup.find("h2")
+    assert h2 is not None and h2.text == "Támogatás"
+    # Ellenőrizzük, hogy a h2 után jön-e a platformos bekezdés
+    next_p = h2.find_next_sibling("p")
+    assert "Támogatott platformok" in next_p.text
+
+def test_09_komment(html_soup):
+    with open("index.html", "r", encoding="utf-8") as f:
         content = f.read()
-    
-    # Ellenőrizd, hogy tartalmazza-e a HP-UX szöveget
-    assert 'HP-UX' in content
-    assert 'Hewlett Packard Unix' in content
-    
-def test_nyelv_beallitas():
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # Ellenőrizd, hogy a nyelv magyarra van-e állítva
-    assert 'lang="hu"' in content or "lang='hu'" in content
-    
-def test_cim():
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # Ellenőrizd a címét
-    assert '<title>HP-UX</title>' in content
-    
-def test_fejcim():
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # Ellenőrizd az első szintű fejezetcímet
-    assert '<h1>HP-UX</h1>' in content
-    
-def test_masodik_szintu_fejcim():
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # Ellenőrizd a második szintű fejezetcímet
-    assert '<h2>Támogatás</h2>' in content
-    
-def test_rovidites():
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # Ellenőrizd az rövidítést
-    assert '<abbr' in content
-    assert 'HP 9000' in content
-    
-def test_kiemeles():
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # Ellenőrizd a kiemelést
-    assert '<b>HP Integral PC</b>' in content
-    
-def test_komment():
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # Ellenőrizd a HTML kommentet
-    assert '<!--' in content
-    assert '-->' in content
-    assert '2025' in content  # vagy az aktuális év
-    
-def test_bekezdesek():
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # Ellenőrizd a bekezdéseket
-    assert '<p>' in content
-    assert '</p>' in content
-    # Legalább 2 bekezdésnek kell lennie
-    assert content.count('<p>') >= 2
+        assert "<!--" in content and "-->" in content
+        assert "Illyés Benedek" in content
+        assert re.search(r"\d{4}[-.]\d{2}[-.]\d{2}", content) is not None
