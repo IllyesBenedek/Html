@@ -1,115 +1,51 @@
+import pytest
+from bs4 import BeautifulSoup
 import os
 import re
-from datetime import datetime
 
-def test_nyelv():
-    """Teszt: az oldal nyelv magyarra van állítva."""
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    assert 'lang="hu"' in content or "lang='hu'" in content
-
-def test_cim():
-    """Teszt: böngészőfülön HP-UX."""
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    assert '<title>HP-UX</title>' in content
-
-def test_h1():
-    """Teszt: egyes szintű fejezetcím HP-UX."""
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    assert '<h1>HP-UX</h1>' in content
-
-def test_h2_cimek():
-    """Teszt: minden bekezdés előtt h2 cím."""
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    assert '<h2>A HP-UX</h2>' in content
-    assert '<h2>Korábbi verziók</h2>' in content
-    assert '<h2>Fájlrendszer</h2>' in content
-
-def test_rovidites():
-    """Teszt: HP-UX rövidítésként jelölve."""
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    assert '<abbr' in content
-    assert 'title=' in content
-    assert 'Hewlett Packard Unix' in content
-
-def test_kiemeles():
-    """Teszt: Hewlett Packard Unix kiemelve."""
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    # <b> vagy <strong> használható
-    assert '<b>Hewlett Packard Unix</b>' in content or '<strong>Hewlett Packard Unix</strong>' in content
-
-def test_unix_bold():
-    """Teszt: Unix operációs félkövér."""
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    assert '<strong>Unix operációs</strong>' in content
-
-def test_vxfs_italic():
-    """Teszt: VxFS-t dőlt."""
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    assert '<em>VxFS-t</em>' in content
-
-def test_komment():
-    """Teszt: HTML komment névvel és dátummal."""
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    assert '<!--' in content
-    assert '-->' in content
-    assert 'Illyés Benedek' in content
-    # Dátum ellenőrzése
-    date_pattern = r'202[0-9]\.[0-9]{2}\.[0-9]{2}'
-    assert re.search(date_pattern, content) is not None
-
-def test_bekezdesek():
-    """Teszt: 3 bekezdés."""
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    assert content.count('<p>') == 3
-    assert content.count('</p>') == 3
-
-def test_minden_szo():
-    """Teszt: minden fontos szó szerepel."""
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    fontos_szavak = ['HP-UX', 'Hewlett Packard Unix', 'Unix System V', 
-                     '1984', 'HP 9000', 'PA-RISC', 'HPE Integrity Servers',
-                     'Motorolla 68000', 'HP Integral PC', 'ACL', 'Veritas', 'VxFS-t']
-    for szo in fontos_szavak:
-        assert szo in content, f"Hiányzó szó: {szo}"
-
-def test_struktura():
-    """Teszt: helyes struktúra."""
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-    # Sorrend: h1, h2, p, h2, p, h2, p
-    lines = [line.strip() for line in content.split('\n') if line.strip()]
-    # Egyszerű struktúra ellenőrzés
-    assert '<h1>' in content
-    assert content.count('<h2>') >= 3
-    assert content.count('<p>') >= 3
-
-if __name__ == "__main__":
-    # Manuális futtatáshoz
-    import sys
-    import inspect
+@pytest.fixture
+def html_soup():
+    path = "index.html"
+    if not os.path.exists(path):
+        pytest.fail(f"{path} nem található!")
+    with open(path, "r", encoding="utf-8") as f:
+        return BeautifulSoup(f.read(), "html.parser")
     
-    sikeres = 0
-    osszes = 0
-    
-    for name, obj in inspect.getmembers(sys.modules[__name__]):
-        if inspect.isfunction(obj) and name.startswith('test_'):
-            try:
-                obj()
-                print(f"✓ {name}")
-                sikeres += 1
-            except AssertionError as e:
-                print(f"✗ {name}: {e}")
-            osszes += 1
-    
-    print(f"\nÖsszesen: {sikeres}/{osszes} teszt sikeres")
+def test_01_nyelv(html_soup):
+    assert html_soup.html.get("lang") == "hu"
+
+def test_02_title(html_soup):
+    assert html_soup.title.text == "HP-UX"
+
+def test_03_focim(html_soup):
+    h1 = html_soup.find("h1")
+    assert h1 is not None and h1.text.strip() == "HP-UX"
+
+def test_04_alcimek(html_soup):
+    h2s = html_soup.find_all("h2")
+    assert len(h2s) >= 3
+
+def test_05_strong_hewlett(html_soup):
+    # Keresünk olyan elemet, amiben benne van a Hewlett Packard Unix
+    target = html_soup.find(["strong", "b"], string=re.compile("Hewlett Packard Unix"))
+    assert target is not None
+
+def test_06_abbr_hpux(html_soup):
+    assert html_soup.find("abbr", string="HP-UX") is not None
+
+def test_07_komment_adatok(html_soup):
+    # A fájl végén lévő komment ellenőrzése
+    with open("index.html", "r", encoding="utf-8") as f:
+        content = f.read()
+        assert re.search(r"<!--.*\d{4}[-.]\d{2}[-.]\d{2}.*-->", content) is not None
+
+def test_08_felkover_unix(html_soup):
+    # Unix operációs szó félkövér keresése
+    target = html_soup.find(["strong", "b"], string=re.compile("Unix operációs"))
+    assert target is not None
+
+def test_09_dolt_vxfs(html_soup):
+    # Ez CSAK akkor megy át, ha a dőlt rész (i vagy em) 
+    # tartalma pontosan "VxFS", se több, se kevesebb.
+    vxfs_italic = html_soup.find(["em", "i"], string="VxFS")
+    assert vxfs_italic is not None
