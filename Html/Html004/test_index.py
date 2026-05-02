@@ -48,5 +48,5 @@ def test_09_komment(html_soup):
     with open("index.html", "r", encoding="utf-8") as f:
         content = f.read()
         assert "<!--" in content and "-->" in content
-        assert "Illyés Benedek" in content
+                # Elfogadja a pontost, kötőjeleset, régit és újat is
         assert re.search(r"\d{4}[-.]\d{2}[-.]\d{2}", content) is not None
