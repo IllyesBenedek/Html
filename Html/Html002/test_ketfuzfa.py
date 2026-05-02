@@ -47,5 +47,5 @@ def test_09_komment(html_soup):
         content = f.read()
         assert "<!--" in content and "-->" in content
         assert "Illyés Benedek" in content
-        # Bármilyen régi vagy új dátum formátumot elfogad (pl. 2025.12.10 vagy 2026-05-02)
+                # Elfogadja a pontost, kötőjeleset, régit és újat is
         assert re.search(r"\d{4}[-.]\d{2}[-.]\d{2}", content) is not None
