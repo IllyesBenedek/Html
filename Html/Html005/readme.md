@@ -1,17 +1,19 @@
-# Feladat 005 - FreeBSD
+# Feladat 005 - FreeBSD Projekt
 
-## Elvégzendő lépések:
-1. **Nyelv**: Magyar (`hu`) nyelv beállítása a html tagben.
-2. **Kódolás**: Karakterkódolás beállítása `UTF-8`-ra.
-3. **Cím**: A böngészőfülön megjelenő cím: `FreeBSD`.
-4. **Főcím**: Az oldal főcíme: `<h1>FreeBSD</h1>`.
-5. **Kiemelés**: A „FreeBSD” szó legalább két helyen legyen félkövér (`strong`).
-6. **Formázás**: A „Berkeley Software Distribution” szöveg legyen egyszerre félkövér és dőlt (`strong` és `em`).
-7. **Tagolás**: Az asztali környezetek és ablakkezelők listáját vesszővel válaszd el, a végén ponttal.
-8. **Kommentek**: Használj HTML megjegyzéseket (pl. `<!-- hasonlóság -->`, `<!-- engedély -->`).
-9. **Lábléc**: Az oldal alján egy blokk elemben szerepeljen a neved és az aktuális dátum.
+Ez a projekt a **FreeBSD** operációs rendszerről szóló weboldal feladatait tartalmazza.
 
-## Tesztelés:
-A teszteléshez a `test_index.py` fájlt használjuk.
+## Elvégzendő feladatok
+1. Az oldal nyelvének beállítása magyarra (`hu`).
+2. Karakterkódolás beállítása (UTF-8) a magyar ékezetekhez.
+3. Böngészőfül címe: `FreeBSD`.
+4. Első szintű fejezetcím (`<h1>`): `FreeBSD`.
+5. A "hasonlóság" megjegyzés alatti bekezdésben a `FreeBSD` szó félkövér (`<strong>`).
+6. Felsorolások tagolása vesszővel, a végén ponttal (GNOME-tól Xfce-ig, és Openbox-tól bspwm-ig).
+7. A "hasonlóság" megjegyzés alatti bekezdésben a `FreeBSD` szó kiemelt (`<mark>`).
+8. A "FreeBSD" megjegyzés alatti bekezdésben a `Berkeley Software Distribution` egyszerre félkövér és dőlt (`<strong><em>`).
+9. A weboldal alján a név és az aktuális dátum egy blokk elemben (`<div>`).
+
+## Tesztelés
+Futtasd a következő parancsot:
 ```bash
-pytest -v test_index.py
+pytest test_freebsd.py
