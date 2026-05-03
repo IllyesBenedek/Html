@@ -39,7 +39,7 @@ def test_06_h2_alcimek(html_soup):
     expected = {"A szemrehányás", "A szentkönyv", "A leborulás"}
     actual = {tag.text.strip() for tag in html_soup.find_all("h2")}
     hianyzo = expected - actual
-    assert not hianyzo, f"Hiba! Ezek az alcímek hiányoznak: {hianyzo}. Jelenleg ezeket találtam: {actual}"
+    assert not hianyzo, f"Hiba! Ez hiányzik: {', '.join(hianyzo)}"
     assert len(actual) == 3, f"Hiba: {len(actual)} alcím van a 3 helyett!"
 
 def test_07_dolt_tekintete(html_soup):
