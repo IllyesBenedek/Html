@@ -18,4 +18,4 @@ a. A fejezetcím tartalma: „Támogatás”
 ## Tesztelés:
 A teszteléshez a `test_hpux.py` fájlt használjuk.
 ```bash
-pytest -v test_hpux.py
+pytest -v test_index.py
