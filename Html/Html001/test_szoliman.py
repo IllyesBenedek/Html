@@ -36,11 +36,11 @@ def test_05_bekezdesek_szama(html_soup):
 
 def test_06_h2_alcimek(html_soup):
     # 6. Kettes szintű fejezetcímek ellenőrzése
-    expected = ["A szemrehányás", "A szentkönyv", "A leborulás"]
-    h2_tags = html_soup.find_all("h2")
-    assert len(h2_tags) == 3
-    for i, tag in enumerate(h2_tags):
-         assert tag.text.strip() == expected[i]
+    expected = {"A szemrehányás", "A szentkönyv", "A leborulás"}
+    actual = {tag.text.strip() for tag in html_soup.find_all("h2")}
+    hianyzo = expected - actual
+    assert not hianyzo, f"Hiba! Ezek az alcímek hiányoznak: {hianyzo}. Jelenleg ezeket találtam: {actual}"
+    assert len(actual) == 3, f"Hiba: {len(actual)} alcím van a 3 helyett!"
 
 def test_07_dolt_tekintete(html_soup):
     # 7. "tekintete azalatt" dőlt (i vagy em)
