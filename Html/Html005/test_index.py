@@ -46,10 +46,12 @@ def test_07_mark_freebsd(html_soup):
 
 def test_08_strong_em_berkeley(html_soup):
     # 8. Berkeley Software Distribution félkövér ÉS dőlt
-    target = html_soup.find(["strong", "b"])
-    inner = target.find(["em", "i"])
-    assert "Berkeley Software Distribution" in inner.text
-
+    p1 = html_soup.find_all("p")[0]
+    target = p1.select_one("strong em, strong i, b em, b i")
+    assert target is not None, "Hiba: nincs félkövérnek és dőltnek jelölve!"
+    assert "Berkeley Software Distribution" in target.text, "Hiba: rossz szöveg!"
+    
+    
 def test_09_footer_div(html_soup):
     # 9. Név és dátum blokk elemben (div) a végén
     div = html_soup.find_all("div")[-1]
