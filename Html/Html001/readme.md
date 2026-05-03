@@ -1,19 +1,19 @@
-# Feladat 001 - Szoliman oldal összeállítása
+# Feladat 001 - Szolimán
 
-A feladat során a megadott források alapján egy strukturált HTML oldalt kell létrehozni.
+## Elvégzendő lépések:
+1. **Tartalom**: A `szoveg.txt` tartalmát illessze a HTML oldal törzs részébe.
+2. **Nyelv**: Állítsa be az oldalt magyar (`hu`) nyelvűre.
+3. **Cím**: A böngészőfülön a „Szolimán” felirat jelenjen meg (`title`).
+4. **Főcím**: A szöveg előtt egyes szintű fejezetcím (`<h1>`), „Szolimán” tartalommal.
+5. **Bekezdések**: A három bekezdést jelölje HTML bekezdésnek (`p`).
+6. **Alcímek**: A bekezdéseknek adjon kettes fejezetcímet (`<h2>`):
+   - 1. bekezdés: A szemrehányás
+   - 2. bekezdés: A szentkönyv
+   - 3. bekezdés: A leborulás
+7. **Dőlt**: A „tekintete azalatt” szöveget az első bekezdésben jelölje dőltnek (`i` vagy `em`).
+8. **Kiemelt**: A harmadik bekezdésben „A szultán” szövegeket jelölje kiemeltnek (`strong`).
+9. **Komment**: A HTML forráskódjában, megjegyzésbe írja a nevét és az aktuális dátumot.
 
-## Elvégzendő feladatok:
-1. **Tartalom beillesztése**: Másold be a szöveget az `index.html` törzsébe.
-2. **Nyelv beállítása**: Állítsd be az oldal nyelvét magyarra (`hu`).
-3. **Böngésző fül címe**: A `<title>` elem tartalma legyen "Szoliman".
-4. **Főcím**: Szúrj be egy `h1` fejezetcímet "Szoliman" tartalommal a szöveg elé.
-5. **Bekezdések**: A szöveget tagold három különálló `<p>` elemre.
-6. **Alcímek**: Minden bekezdés kapjon egy `h2` szintű alcímet: *A szemrehányás*, *A szentkönyv*, *A leborulás*.
-7. **Dőlt formázás**: Az első bekezdésben a "tekintete azalatt" szöveget tedd döltté.
-8. **Kiemelés**: A harmadik bekezdésben "A szultán" kifejezéseket jelöld kiemeltként (félkövér).
-9. **Dokumentáció**: A forráskódban megjegyzésként tüntesd fel a nevedet és az aktuális dátumot.
-
-## Ellenőrzés
-Futtasd a tesztet a terminálban:
+## Tesztelés:
 ```bash
-pytest -v test_solution.py
+pytest -v test_index.py
