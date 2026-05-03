@@ -13,4 +13,4 @@
 
 ## Tesztelés:
 ```bash
-pytest -v test_solution.py
+pytest -v test_ketfuzfa.py
