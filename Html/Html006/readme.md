@@ -1,15 +1,22 @@
 # Feladat 006 - HP-UX
 
 ## Elvégzendő lépések:
-1. **Nyelv**: Az oldal nyelve magyar (`hu`).
-2. **Böngésző fül**: A cím (`title`) legyen `HP-UX`.
-3. **Főcím**: Az első bekezdés előtt egy `<h1>HP-UX</h1>` fejezetcím.
-4. **Alcímek**: Minden fejezet előtt `<h2>` cím, a felette lévő megjegyzés szövegével.
-5. **Kiemelés**: A „Hewlett Packard Unix” szöveg legyen kiemelt (`strong`).
-6. **Rövidítés**: A „HP-UX” szöveg legyen rövidítés (`abbr`).
-7. **Forráskód megjegyzés**: A név és az aktuális dátum szerepeljen HTML kommentben.
-8. **Félkövér**: Az első bekezdésben a „Unix operációs” szöveg legyen félkövér.
-9. **Dőlt**: Az utolsó bekezdésben a „VxFS” szöveg legyen dőlt (toldalék nélkül).
+1. Állítsa be az oldal nyelvét magyarra.
+2. Állítsa be, hogy a böngésző fülön a HP-UX felirat jelenjen meg.
+3. A weblap tetején,
+a. az első bekezdés előtt
+b. legyen egy HP-UX fejezetcím, amit egyesszintűnek jelöl.
+4. Minden fejezet előtt
+a. legyen egy kettes szintű fejezetcím
+b. tartalma a fejezet előtti megjegyzés szövege
+5. A „A HP-UX” megjegyzéssel ellátott bekezdésben:
+a. jelölje kiemeltnek a Hewlett Packard Unix szöveget.
+b. A HP-UX szöveget jelölje rövidítésnek.
+6. A három bekezdésnek adjon kettes szintű fejezetcímet.
+a. A cím a bekezdés előtti megjegyzésbe tett szöveg.
+7. A HTML forráskódjában, megjegyzésbe, írja, a nevét és az aktuális dátumot.
+8. Az első bekezdésben a „Unix operációs” szöveg legyen félkövérnek jelölve.
+9. Az utolsó bekezdésben a „VxFS-t” szöveg legyen dőltnek jelölve.
 
 ## Tesztelés:
 ```bash

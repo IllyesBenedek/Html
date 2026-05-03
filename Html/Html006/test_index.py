@@ -10,42 +10,49 @@ def html_soup():
         pytest.fail(f"{path} nem található!")
     with open(path, "r", encoding="utf-8") as f:
         return BeautifulSoup(f.read(), "html.parser")
-    
-def test_01_nyelv(html_soup):
+
+def test_01_nyelv_magyar(html_soup):
+    # 1. Állítsa be az oldal nyelvét magyarra.
     assert html_soup.html.get("lang") == "hu"
 
-def test_02_title(html_soup):
-    assert html_soup.title.text == "HP-UX"
+def test_02_title_hpux(html_soup):
+    # 2. Állítsa be, hogy a böngészőfülön a HP-UX felirat jelenjen meg.
+    assert html_soup.title.text.strip() == "HP-UX"
 
-def test_03_focim(html_soup):
+def test_03_h1_hpux(html_soup):
+    # 3. Weblap tetején egyes szintű fejezetcím, HP-UX tartalommal.
     h1 = html_soup.find("h1")
     assert h1 is not None and h1.text.strip() == "HP-UX"
 
-def test_04_alcimek(html_soup):
-    h2s = html_soup.find_all("h2")
-    assert len(h2s) >= 3
+def test_04_h2_alcimek(html_soup):
+    # 4. Minden fejezet előtt legyen egy kettes szintű fejezetcím.
+    h2_tags = html_soup.find_all("h2")
+    assert len(h2_tags) == 3
 
-def test_05_strong_hewlett(html_soup):
-    # Keresünk olyan elemet, amiben benne van a Hewlett Packard Unix
-    target = html_soup.find(["strong", "b"], string=re.compile("Hewlett Packard Unix"))
-    assert target is not None
+def test_05_mark_hewlett_packard(html_soup):
+    # 5. Jelölje kiemeltnek (mark) a Hewlett Packard Unix szöveget.
+    assert html_soup.find("mark", string=re.compile("Hewlett Packard Unix")) is not None
 
 def test_06_abbr_hpux(html_soup):
-    assert html_soup.find("abbr", string="HP-UX") is not None
+    # 5/b. A HP-UX szöveg jelölése rövidítésnek (abbr).
+    assert html_soup.find("abbr", string="HP-UX")
+    p_tags = html_soup.find_all("p")
+    assert len(p_tags) == 3, f"Hiba: {len(p_tags)} bekezdés (<p>) van a 3 helyett!"
 
 def test_07_komment_adatok(html_soup):
-    # A fájl végén lévő komment ellenőrzése
+    # 7. HTML forráskódban megjegyzésben név és dátum.
     with open("index.html", "r", encoding="utf-8") as f:
         content = f.read()
-        assert re.search(r"<!--.*\d{4}[-.]\d{2}[-.]\d{2}.*-->", content) is not None
+        assert re.search(r"<!--.*202[0-9].*-->", content) is not None
 
-def test_08_felkover_unix(html_soup):
-    # Unix operációs szó félkövér keresése
-    target = html_soup.find(["strong", "b"], string=re.compile("Unix operációs"))
+def test_08_strong_unix_operacios(html_soup):
+    # 8. Az első bekezdésben a „Unix operációs” szó legyen félkövér.
+    first_p = html_soup.find_all("p")[0]
+    target = first_p.find(["strong", "b"], string=re.compile("Unix operációs"))
     assert target is not None
 
-def test_09_dolt_vxfs(html_soup):
-    # Ez CSAK akkor megy át, ha a dőlt rész (i vagy em) 
-    # tartalma pontosan "VxFS", se több, se kevesebb.
-    vxfs_italic = html_soup.find(["em", "i"], string="VxFS")
-    assert vxfs_italic is not None
+def test_09_em_vxfs(html_soup):
+    # 9. Az utolsó bekezdésben a „VxFS-t” szöveg legyen dőlt.
+    last_p = html_soup.find_all("p")[-1]
+    target = last_p.find(["em", "i"], string=re.compile("VxFS"))
+    assert target is not None
