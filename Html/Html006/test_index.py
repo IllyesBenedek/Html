@@ -26,8 +26,11 @@ def test_03_h1_hpux(html_soup):
 
 def test_04_h2_alcimek(html_soup):
     # 4. Minden fejezet előtt legyen egy kettes szintű fejezetcím.
-    h2_tags = html_soup.find_all("h2")
-    assert len(h2_tags) == 3
+    expected = {"A HP-UX", "Korábbi verziók", "Fájlrendszer"}
+    actual = {tag.text.strip() for tag in html_soup.find_all("h2")}
+    hianyzo = expected - actual
+    assert not hianyzo, f"Hiba! Ez hiányzik: {', '.join(hianyzo)}"
+    assert len(actual) == 3, f"Hiba: {len(actual)} alcím van a 3 helyett!"
 
 def test_05_mark_hewlett_packard(html_soup):
     # 5. Jelölje kiemeltnek (mark) a Hewlett Packard Unix szöveget.
