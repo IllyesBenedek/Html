@@ -11,42 +11,49 @@ def html_soup():
     with open(path, "r", encoding="utf-8") as f:
         return BeautifulSoup(f.read(), "html.parser")
 
-def test_01_tartalom(html_soup):
-    assert "Hewlett Packard" in html_soup.text
+def test_01_tartalom_beillesztes(html_soup):
+    # 1. hpux.txt tartalom ellenőrzése
+    body_text = html_soup.body.get_text()
+    assert "Hewlett Packard Unix" in body_text
 
-def test_02_nyelv(html_soup):
+def test_02_nyelv_beallitas(html_soup):
+    # 2. Nyelv magyarra állítása
     assert html_soup.html.get("lang") == "hu"
 
-def test_03_title(html_soup):
-    assert html_soup.title.text == "HP-UX"
+def test_03_title_hpux(html_soup):
+    # 3. Böngészőfül címe: HP-UX
+    assert html_soup.title.text.strip() == "HP-UX"
 
-def test_04_h1(html_soup):
-    assert html_soup.find("h1").text == "HP-UX"
+def test_04_h1_hpux(html_soup):
+    # 4. Egyes szintű fejezetcím: HP-UX
+    h1 = html_soup.find("h1")
+    assert h1 is not None and h1.text.strip() == "HP-UX"
 
-def test_05_bekezdesek_szama(html_soup):
-    # Két fő bekezdésnek kell lennie a leírás alapján
-    assert len(html_soup.find_all("p")) == 2
+def test_05_bekezdesek_es_vesszo(html_soup):
+    # 5. Bekezdések és vesszős tagolás
+    ps = html_soup.find_all("p")
+    assert len(ps) >= 2
+    assert "HP 9000," in ps[1].text and "HP Integral PC" in ps[1].text
 
-def test_06_rovidites(html_soup):
-    # HP 9000 rövidítésként (abbr)
-    abbr = html_soup.find("abbr")
-    assert abbr is not None and "HP 9000" in abbr.text
+def test_06_abbr_hp9000(html_soup):
+    # 6. HP 9000 rövidítésként (abbr)
+    target = html_soup.find("abbr", string="HP 9000")
+    assert target is not None
 
-def test_07_kiemeles(html_soup):
-    # HP Integral PC kiemelt (strong/b)
-    strong = html_soup.find(["strong", "b"])
-    assert strong is not None and "HP Integral PC" in strong.text
+def test_07_mark_integral(html_soup):
+    # 7. HP Integral PC kiemelt (mark)
+    target = html_soup.find("mark", string="HP Integral PC")
+    assert target is not None
 
-def test_08_h2_helye_es_szovege(html_soup):
-    h2 = html_soup.find("h2")
-    assert h2 is not None and h2.text == "Támogatás"
-    # Ellenőrizzük, hogy a h2 után jön-e a platformos bekezdés
-    next_p = h2.find_next_sibling("p")
-    assert "Támogatott platformok" in next_p.text
+def test_08_h2_tamogatas(html_soup):
+    # 8. Kettes szintű fejezetcím: Támogatás
+    h2_tags = html_soup.find_all("h2")
+    assert len(h2_tags) == 1
+    assert h2_tags[0].text.strip() == "Támogatás"
 
-def test_09_komment(html_soup):
+def test_09_komment_adatok(html_soup):
+    # 9. Név és dátum a forráskódban
     with open("index.html", "r", encoding="utf-8") as f:
         content = f.read()
-        assert "<!--" in content and "-->" in content
-                # Elfogadja a pontost, kötőjeleset, régit és újat is
-        assert re.search(r"\d{4}[-.]\d{2}[-.]\d{2}", content) is not None
+        assert re.search(r"<!--.*\d{4}[-.]\d{2}[-.]\d{2}.*-->", content) is not None
+
