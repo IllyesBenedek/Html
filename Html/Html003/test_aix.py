@@ -35,7 +35,7 @@ def test_05_bekezdesek_szama(html_soup):
     assert len(ps) == 3
 
 def test_06_h2_alcimek(html_soup):
-    # 6. Kettes szintű fejezetcímek ellenőrzése (rövid verzió)
+    # 6. Kettes szintű fejezetcímek ellenőrzése
     expected = ["Egy", "Kettő", "Három"]
     h2_tags = html_soup.find_all("h2")
     assert len(h2_tags) == 3 
