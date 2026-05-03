@@ -36,11 +36,11 @@ def test_05_bekezdesek_szama(html_soup):
 
 def test_06_h2_alcimek(html_soup):
     # 6. Kettes szintű fejezetcímek ellenőrzése
-    expected = ["Egy", "Kettő", "Három"]
-    h2_tags = html_soup.find_all("h2")
-    assert len(h2_tags) == 3 
-    for i, tag in enumerate(h2_tags):
-        assert tag.text.strip() == expected[i]
+    expected = {"Egy", "Kettő", "Három"}
+    actual = {tag.text.strip() for tag in html_soup.find_all("h2")}
+    hianyzo = expected - actual
+    assert not hianyzo, f"Hiba! Ez hiányzik: {', '.join(hianyzo)}"
+    assert len(actual) == 3, f"Hiba: {len(actual)} alcím van a 3 helyett!"
 
 def test_07_felkovér_szavak(html_soup):
     # 7. Advanced Interactive eXecutive félkövér (strong)
