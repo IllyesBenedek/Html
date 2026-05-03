@@ -1,3 +1,6 @@
+# Feladat 007 - vi szövegszerkesztő weblap
+
+## Elvégzendő lépések:
 1. Állítsa be az oldal nyelvét magyarra.
 2. Állítsa be az oldal kódolását UTF-8-ra.
 3. Állítsa be, hogy a böngésző fülön a „vi” felirat jelenjen meg.
