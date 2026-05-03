@@ -16,4 +16,4 @@
 
 ## Tesztelés:
 ```bash
-pytest -v test_index.py
+pytest -v test_szoliman.py
