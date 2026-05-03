@@ -36,10 +36,11 @@ def test_05_bekezdesek_szama(html_soup):
 
 def test_06_h2_alcimek(html_soup):
     # 6. Kettes szintű fejezetcímek ellenőrzése
-    h2_texts = [h2.text.strip() for h2 in html_soup.find_all("h2")]
     expected = ["A szemrehányás", "A szentkönyv", "A leborulás"]
-    for title in expected:
-        assert title in h2_texts
+    h2_tags = html_soup.find_all("h2")
+    assert len(h2_tags) == 3
+    for i, tag in enumerate(h2_tags):
+         assert tag.text.strip() == expected[i]
 
 def test_07_dolt_tekintete(html_soup):
     # 7. "tekintete azalatt" dőlt (i vagy em)
