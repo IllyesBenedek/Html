@@ -39,13 +39,11 @@ def test_05_mark_hewlett_packard(html_soup):
 def test_06_h2_megjegyzes(html_soup):
     for h in html_soup.find_all("h2"):
         c = h.find_previous(string=lambda t: isinstance(t, Comment))
-        assert c is not None, f"HIBA: A(z) '{h.text.strip()}' cím előtt nincs megjegyzés!"
-        assert h.text.strip() == c.strip(), f"HIBA: A(z) '{h.text.strip()}' nem egyezik az előtte lévő megjegyzéssel!"
+        assert c and h.text.strip() == c.strip(), f"HIBA: Rossz komment a '{h.text.strip()}' előtt!"
 
 def test_07_komment_adatok(html_soup):
     with open("index.html", "r", encoding="utf-8") as f:
-        content = f.read()
-        assert re.search(r"<!--.*202[0-9].*-->", content), "HIBA: Hiányzik a neved vagy a dátum!"
+        assert re.search(r"<!--.*[a-zA-Záéíóöőúüű].*\d{4}.*-->", f.read()), "HIBA: Név/dátum hiányzik!"
 
 def test_08_strong_unix_operacios(html_soup):
     p = html_soup.find(string=lambda t: isinstance(t, Comment) and "A HP-UX" in t).find_next("p")
