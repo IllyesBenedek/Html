@@ -1,5 +1,5 @@
 import pytest
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Comment
 import os
 import re
 
@@ -12,42 +12,35 @@ def html_soup():
         return BeautifulSoup(f.read(), "parser.parser" if "parser.parser" in str(f) else "html.parser")
 
 def test_01_nyelv_magyar(html_soup):
-    # 1. Állítsa be az oldal nyelvét magyarra.
     assert html_soup.html.get("lang") == "hu", "Hiba: A nyelv nincs 'hu'-ra állítva!"
 
 def test_02_karakterkodolas(html_soup):
-    # 2. Állítsa be az oldal kódolását UTF-8-ra.
     meta = html_soup.find("meta", charset=re.compile(r"utf-8", re.I))
     assert meta is not None, "Hiba: Hiányzik az UTF-8 kódolás beállítása!"
 
 def test_03_title_vi(html_soup):
-    # 3. Állítsa be, hogy a böngészőfülön a „vi” felirat jelenjen meg.
     assert html_soup.title.text.strip() == "vi", "Hiba: A <title> nem 'vi'!"
 
 def test_04_h1_vi(html_soup):
-    # 4. Weblap tetején, az első bekezdés előtt legyen egy egyes szintű fejezetcím (h1)
     h1 = html_soup.find("h1")
     assert h1 is not None and h1.text.strip() == "vi", "Hiba: Nincs <h1> 'vi' tartalommal!"
 
 def test_05_h2_szamlalas(html_soup):
-    # 5. és 7. Minden bekezdés előtt kettes szintű fejezetcím (h2)
-    elvart_cimek = {"vi", "Az eredeti", "Szabvány", "Interfész"}
-    aktualis_h2_szovegek = [h2.text.strip() for h2 in html_soup.find_all("h2")]
-    for cim in elvart_cimek:
-        assert cim in aktualis_h2_szovegek, f"Hiba: Hiányzik a(z) '{cim}' alcím (h2)!"
-    assert len(aktualis_h2_szovegek) == 4, f"Hiba: {len(aktualis_h2_szovegek)} alcím van a 4 helyett!"   
+    exp, act = {"Az eredeti", "Szabvány", "Interfész"}, {h.text.strip() for h in html_soup.find_all("h2")}
+    hiany = exp - act
+    assert not hiany, f"HIBA: {len(hiany)} hiányzik: {hiany}. Megvan: {len(act)}/4"
+    for h in html_soup.find_all("h2"):
+        c = h.find_previous(string=lambda t: isinstance(t, Comment))
+        assert c and h.text.strip() == c.strip(), f"HIBA: Rossz komment: '{h.text.strip()}'"
 
 def test_06_p_szamlalas(html_soup):
-    # Ellenőrizzük, hogy megvan-e a 4 bekezdés
     ps = html_soup.find_all("p")
-    assert len(ps) == 4, f"Hiba: {len(ps)} bekezdés (p) van a 4 helyett!"
+    assert len(ps) == 4, f"Hiba: {len(ps)} bekezdés van a 4 helyett!"
 
 def test_07_kbd_interfesz_blokk(html_soup):
-    # 6. Az „Interfész” megjegyzéssel ellátott bekezdésben (utolsó):
-    # a-b. Billentyűzetek jelölése (kbd), és 'i'/'a' betűk kiemelése
     last_p = html_soup.find_all("p")[-1]
     kbds = last_p.find_all("kbd")
-    assert len(kbds) >= 3, "Hiba: Kevés <kbd> elemet használtál az Interfész szakaszban!"
+    assert len(kbds) >= 3, "Hiba: Kevés számítógép billentyűnek jelölő elemet használtál az Interfész szakaszban!"
     
     # 6.c. Az Esc szó szintén legyen számítógép billentyűnek jelölve
     esc_kbd = last_p.find("kbd", string=re.compile("Esc"))
