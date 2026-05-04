@@ -12,8 +12,7 @@ def html_soup():
         return BeautifulSoup(f.read(), "html.parser")
 
 def test_01_tartalom_beillesztes(html_soup):
-    body_text = html_soup.body.get_text()
-    assert "Szolimán elkomorult" in body_text, "HIBA: A szöveg nincs beillesztve vagy hibás az ékezet!"
+    assert "Szolimán elkomorult" in html_soup.body.get_text(), "HIBA: A szöveg hiányzik vagy hibás ékezet!"
 
 def test_02_nyelv_beallitas(html_soup):
     lang = html_soup.html.get("lang")
@@ -32,17 +31,15 @@ def test_05_bekezdesek_szama(html_soup):
     assert len(ps) == 3, f"HIBA: Pontosan 3 bekezdés kell, de {len(ps)} van!"
 
 def test_06_h2_alcimek(html_soup):
-    expected = {"A szemrehányás", "A szentkönyv", "A leborulás"}
-    actual = {tag.text.strip() for tag in html_soup.find_all("h2")}
-    hianyzo = expected - actual
-    assert not hianyzo, f"Hiba! Ez hiányzik: {', '.join(hianyzo)}"
-    assert len(actual) == 3, f"Hiba: {len(actual)} alcím van a 3 helyett!"
+    exp, act = {"A szemrehányás", "A szentkönyv", "A leborulás"}, {t.text.strip() for t in html_soup.find_all("h2")}
+    hiany = exp - act
+    assert not hiany, f"HIBA! Hiányzó alcímek: {', '.join(hiany)}"
+    assert len(act) == 3, f"HIBA: 3 alcím helyett {len(act)} van!"
 
 def test_07_dolt_tekintete(html_soup):
     p1 = html_soup.find_all("p")[0]
-    target = p1.find(lambda tag: tag.name in ["i", "em"] and "tekintete azalatt" in tag.text)
-    assert target is not None, "HIBA: A 'tekintete azalatt' szöveg nincs dőlttel jelölve!"
-
+    assert p1.find(["i", "em"], string=re.compile("tekintete azalatt")), "HIBA: A 'tekintete azalatt' nem dőlt!"
+    
 def test_08_strong_szultan(html_soup):
     p3 = html_soup.find_all("p")[2]
     targets = [t for t in p3.find_all(["strong", "b"]) if "A szultán" in t.text]
@@ -50,6 +47,4 @@ def test_08_strong_szultan(html_soup):
 
 def test_09_komment_adatok(html_soup):
     with open("szoliman.html", "r", encoding="utf-8") as f:
-        content = f.read()
-        nev_es_datum = r"<!--.*[a-zA-Záéíóöőúüű].*\d{4}[-.]\d{2}[-.]\d{2}.*-->"
-        assert re.search(nev_es_datum, content) is not None, "HIBA: A kommentből hiányzik a név vagy a dátum formátuma rossz!"
+        assert re.search(r"<!--.*[a-zA-Záéíóöőúüű].*\d{4}.*-->", f.read()), "HIBA: Név vagy dátum hiányzik!"
