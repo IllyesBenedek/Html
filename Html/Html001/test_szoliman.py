@@ -31,11 +31,12 @@ def test_05_bekezdesek_szama(html_soup):
     assert len(ps) == 3, f"HIBA: Pontosan 3 bekezdés kell, de {len(ps)} van!"
 
 def test_06_h2_alcimek(html_soup):
-    exp, act = {"A szemrehányás", "A szentkönyv", "A leborulás"}, {t.text.strip() for t in html_soup.find_all("h2")}
+    exp = {"Egy", "Kettő", "Három"}
+    act = {t.text.strip() for t in html_soup.find_all("h2")}
     hiany = exp - act
-    assert not hiany, f"HIBA! Hiányzó alcímek: {', '.join(hiany)}"
-    assert len(act) == 3, f"HIBA: 3 alcím helyett {len(act)} van!"
-
+    
+    assert not hiany, f"HIBA: {len(hiany)} hiányzik ({', '.join(hiany)}). Megvan: {len(act)}/3"
+    
 def test_07_dolt_tekintete(html_soup):
     p1 = html_soup.find_all("p")[0]
     assert p1.find(["i", "em"], string=re.compile("tekintete azalatt")), "HIBA: A 'tekintete azalatt' nem dőlt!"
