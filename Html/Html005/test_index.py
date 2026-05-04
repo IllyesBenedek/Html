@@ -43,7 +43,7 @@ def test_07_mark_freebsd(html_soup):
 def test_08_strong_em_berkeley(html_soup):
     comment = html_soup.find(string=lambda t: isinstance(t, Comment) and "FreeBSD" in t)
     target = comment.find_next("p").select_one("strong em, em strong, b i, i b")
-    assert target and "Berkeley Software Distribution" in target.text, "HIBA: Hiányzik a félkövér+dőlt rész!"
+    assert target and "Berkeley Software Distribution" in target.text, "HIBA: Hiányzik a félkövér és dőlt rész!"
 
 def test_09_footer_div(html_soup):
     div_text = " ".join(d.get_text() for d in html_soup.find_all("div"))
