@@ -14,7 +14,6 @@ b. A HP 9000 és HP Integral PC sorokat vesszővel tagolja.
 a. A fejezetcím tartalma: „Támogatás”
 9. A HTML forráskódjában, megjegyzésbe, írja, a nevét és az aktuális dátumot.
 
-
 ## Tesztelés:
 A teszteléshez a `test_hpux.py` fájlt használjuk.
 ```bash
