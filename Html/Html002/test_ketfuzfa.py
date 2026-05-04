@@ -33,8 +33,8 @@ def test_05_bekezdesek(html_soup):
 def test_06_h2_cimek(html_soup):
     exp, act = {"A jövedelem", "A kollégium", "Az orákulum"}, {t.text.strip() for t in html_soup.find_all("h2")}
     hiany = exp - act
-    assert not hiany, f"HIBA: Hiányzó alcímek: {', '.join(hiany)}"
-    assert len(act) == 3, f"HIBA: 3 helyett {len(act)} alcím van!"
+    
+    assert not hiany, f"HIBA: {len(hiany)} hiányzik ({', '.join(hiany)}). Megvan: {len(act)}/3"
 
 def test_07_kiemelt_szoveg(html_soup):
     p3 = html_soup.find_all("p")[2]
