@@ -31,10 +31,11 @@ def test_05_bekezdesek(html_soup):
     assert len(ps) == 3, f"HIBA: 3 bekezdés kell, de {len(ps)} van!"
 
 def test_06_h2_cimek(html_soup):
-    exp, act = {"A jövedelem", "A kollégium", "Az orákulum"}, {t.text.strip() for t in html_soup.find_all("h2")}
-    hiany = exp - act
+    expected = ["A jövedelem", "A kollégium", "Az orákulum"]
+    actual = [h.text.strip() for h in html_soup.find_all("h2")]
+    hianyzo = [item for item in expected if item not in actual]
+    assert len(actual) == 3, f"HIBA: 3 cím kellene, de csak {len(actual)} van! Hiányzik: {hianyzo}"
     
-    assert not hiany, f"HIBA: {len(hiany)} hiányzik ({', '.join(hiany)}). Megvan: {len(act)}/3"
 
 def test_07_kiemelt_szoveg(html_soup):
     p3 = html_soup.find_all("p")[2]
