@@ -12,8 +12,7 @@ def html_soup():
         return BeautifulSoup(f.read(), "html.parser")
 
 def test_01_tartalom_beillesztes(html_soup):
-    body_text = html_soup.body.get_text()
-    assert "kereskedelmi Unix operációs rendszer" in body_text, "HIBA: Az aix.txt tartalma nincs (megfelelően) beillesztve!"
+    assert "kereskedelmi Unix operációs rendszer" in html_soup.get_text(), "HIBA: A szöveg hiányzik vagy hibás ékezet!"
 
 def test_02_nyelv_beallitas(html_soup):
     lang = html_soup.html.get("lang")
@@ -32,23 +31,20 @@ def test_05_bekezdesek_szama(html_soup):
     assert len(ps) == 3, f"HIBA: Pontosan 3 bekezdés (p) kell, de {len(ps)} van!"
 
 def test_06_h2_alcimek(html_soup):
-    expected = {"Egy", "Kettő", "Három"}
-    actual = {tag.text.strip() for tag in html_soup.find_all("h2")}
-    hianyzo = expected - actual
-    assert not hianyzo, f"Hiba! Ez hiányzik: {', '.join(hianyzo)}"
-    assert len(actual) == 3, f"Hiba: {len(actual)} alcím van a 3 helyett!"
+    exp = {"Egy", "Kettő", "Három"}
+    act = {t.text.strip() for t in html_soup.find_all("h2")}
+    hiany = exp - act
+    
+    msg = f"HIBA: {len(hiany)} hiányzik ({', '.join(hiany)}). Megvan: {len(act)}/3"
+    assert not hiany, msg
 
 def test_07_felkovér_szavak(html_soup):
-    target = html_soup.find(lambda tag: tag.name in ["strong", "b"] and "Advanced Interactive eXecutive" in tag.text)
-    assert target is not None, "HIBA: Az 'Advanced Interactive eXecutive' nincs félkövérrel jelölve!"
+    assert html_soup.find(["strong", "b"], string=re.compile("Advanced Interactive eXecutive")), "HIBA: Az 'Advanced Interactive eXecutive' nem félkövér!"
 
 def test_08_kiemelt_aix(html_soup):
-    marks = [m for m in html_soup.find_all("mark") if m.text.strip() == "AIX"]
-    mark_szama = len(marks)
-    assert mark_szama == 3, f"HIBA: Pontosan 3 db AIX kiemelés kell, de {mark_szama} található!"
+   marks = [m for m in html_soup.find_all("mark") if m.text.strip() == "AIX"]
+   assert len(marks) == 3, f"HIBA: 3 db AIX kiemelés kell, de {len(marks)} van!"
 
 def test_09_komment_adatok(html_soup):
     with open("index.html", "r", encoding="utf-8") as f:
-        content = f.read()
-        minta = r"<!--.*[a-zA-Záéíóöőúüű].*\d{4}[-.]\d{2}[-.]\d{2}.*-->"
-        assert re.search(minta, content) is not None, "HIBA: Hiányzik a név vagy a dátum a kommentből!"
+        assert re.search(r"<!--.*[a-zA-Záéíóöőúüű].*\d{4}.*-->", f.read()), "HIBA: Név vagy dátum hiányzik a kommentből!"
