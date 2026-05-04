@@ -12,7 +12,6 @@ def html_soup():
         return BeautifulSoup(f.read(), "html.parser")
 
 def test_01_tartalom(html_soup):
-    # 1. A szöveg tartalmának ellenőrzése a törzsben
     body_text = html_soup.body.get_text()
     assert "tisztes matrónának" in html_soup.text, "HIBA: A szöveg nincs beillesztve vagy hibás kódolás!"
 
