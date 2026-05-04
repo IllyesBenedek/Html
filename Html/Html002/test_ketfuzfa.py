@@ -1,5 +1,5 @@
 import pytest
-from bs4 import BeautifulSoup, Comment
+from bs4 import BeautifulSoup
 import os
 import re
 
@@ -12,8 +12,7 @@ def html_soup():
         return BeautifulSoup(f.read(), "html.parser")
 
 def test_01_tartalom(html_soup):
-    body_text = html_soup.body.get_text()
-    assert "tisztes matrónának" in html_soup.text, "HIBA: A szöveg nincs beillesztve vagy hibás kódolás!"
+    assert "tisztes matrónának" in html_soup.get_text(), "HIBA: A szöveg hiányzik vagy hibás kódolás!"
 
 def test_02_nyelv(html_soup):
     lang = html_soup.html.get("lang")
@@ -32,25 +31,19 @@ def test_05_bekezdesek(html_soup):
     assert len(ps) == 3, f"HIBA: 3 bekezdés kell, de {len(ps)} van!"
 
 def test_06_h2_cimek(html_soup):
-    expected = {"A jövedelem", "A kollégium", "Az orákulum"}
-    actual = {tag.text.strip() for tag in html_soup.find_all("h2")}
-    hianyzo = expected - actual
-    assert not hianyzo, f"HIBA: Hiányzó alcímek: {', '.join(hianyzo)}"
+    exp, act = {"A jövedelem", "A kollégium", "Az orákulum"}, {t.text.strip() for t in html_soup.find_all("h2")}
+    hiany = exp - act
+    assert not hiany, f"HIBA: Hiányzó alcímek: {', '.join(hiany)}"
+    assert len(act) == 3, f"HIBA: 3 helyett {len(act)} alcím van!"
 
 def test_07_kiemelt_szoveg(html_soup):
     p3 = html_soup.find_all("p")[2]
-    target = p3.find(lambda tag: tag.name in ["strong", "b"] and "bevette magát" in tag.text)
-    assert target is not None, "HIBA: A 'bevette magát' nincs kiemelve a 3. bekezdésben!"
+    assert p3.find(["strong", "b"], string=re.compile("bevette magát")), "HIBA: A 'bevette magát' nincs kiemelve a 3. bekezdésben!"
 
 def test_08_dolt_szoveg(html_soup):
-    # 8. "időszerint" dőlt (i vagy em) a második bekezdésben
     p2 = html_soup.find_all("p")[1]
-    italic = p2.find(lambda tag: tag.name in ["i", "em"] and "időszerint" in tag.text)
-    assert italic is not None, "HIBA: Az 'időszerint' nincs dőlttel jelölve a 2. bekezdésben!"
+    assert p2.find(["i", "em"], string=re.compile("időszerint")), "HIBA: Az 'időszerint' nincs dőlttel jelölve!"
 
 def test_09_komment(html_soup):
-    # 8. "időszerint" dőlt (i vagy em) a második bekezdésben
     with open("index.html", "r", encoding="utf-8") as f:
-        content = f.read()
-        minta = r"<!--.*[a-zA-Záéíóöőúüű].*\d{4}[-.]\d{2}[-.]\d{2}.*-->"
-        assert re.search(minta, content) is not None, "HIBA: A kommentből hiányzik a név vagy a dátum!"
+        assert re.search(r"<!--.*[a-zA-Záéíóöőúüű].*\d{4}.*-->", f.read()), "HIBA: Név vagy dátum hiányzik a kommentből!"
