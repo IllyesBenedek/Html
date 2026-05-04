@@ -35,8 +35,7 @@ def test_06_h2_alcimek(html_soup):
     act = {t.text.strip() for t in html_soup.find_all("h2")}
     hiany = exp - act
     
-    msg = f"HIBA: {len(hiany)} hiányzik ({', '.join(hiany)}). Megvan: {len(act)}/3"
-    assert not hiany, msg
+    assert not hiany, f"HIBA: {len(hiany)} hiányzik ({', '.join(hiany)}). Megvan: {len(act)}/3"
 
 def test_07_felkovér_szavak(html_soup):
     assert html_soup.find(["strong", "b"], string=re.compile("Advanced Interactive eXecutive")), "HIBA: Az 'Advanced Interactive eXecutive' nem félkövér!"
