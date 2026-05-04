@@ -31,11 +31,10 @@ def test_05_bekezdesek_szama(html_soup):
     assert len(ps) == 3, f"HIBA: Pontosan 3 bekezdés (p) kell, de {len(ps)} van!"
 
 def test_06_h2_alcimek(html_soup):
-    exp = {"Egy", "Kettő", "Három"}
-    act = {t.text.strip() for t in html_soup.find_all("h2")}
-    hiany = exp - act
-    
-    assert not hiany, f"HIBA: {len(hiany)} hiányzik ({', '.join(hiany)}). Megvan: {len(act)}/3"
+    expected = ["Egy", "Kettő", "Három"]
+    actual = [h.text.strip() for h in html_soup.find_all("h2")]
+    hianyzo = [item for item in expected if item not in actual]
+    assert len(actual) == 3, f"HIBA: 3 cím kellene, de csak {len(actual)} van! Hiányzik: {hianyzo}"
 
 def test_07_felkovér_szavak(html_soup):
     assert html_soup.find(["strong", "b"], string=re.compile("Advanced Interactive eXecutive")), "HIBA: Az 'Advanced Interactive eXecutive' nem félkövér!"
