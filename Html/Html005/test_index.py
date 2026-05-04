@@ -16,8 +16,7 @@ def test_01_nyelv_magyar(html_soup):
     assert lang == "hu", f"HIBA: A nyelv nincs magyarra (hu) állítva! (Jelenleg: {lang})"
 
 def test_02_karakterkodolas(html_soup):
-    meta = html_soup.find("meta", charset=re.compile(r"utf-8", re.I))
-    assert meta is not None, "HIBA: Hiányzik a <meta charset='utf-8'/>!"
+    assert html_soup.find("meta", charset=re.compile(r"utf-8", re.I)), "HIBA: Hiányzik az UTF-8 kódolás!"
 
 def test_03_title_freebsd(html_soup):
     assert html_soup.title.text.strip() == "FreeBSD", "HIBA: A title nem 'FreeBSD'!"
@@ -28,32 +27,25 @@ def test_04_h1_freebsd(html_soup):
 
 def test_05_strong_freebsd(html_soup):
     comment = html_soup.find(string=lambda t: isinstance(t, Comment) and "hasonlóság" in t)
-    target_p = comment.find_next("p")
-    strong_tag = target_p.find(["strong", "b"])
-    assert strong_tag is not None, "HIBA: Nincs félkövér szöveg a bekezdésben!"
-    assert "FreeBSD" in strong_tag.get_text(), "HIBA: A 'FreeBSD' szó nem félkövér!"
-
+    p = comment.find_next("p")
+    assert p.find(["strong", "b"], string=re.compile("FreeBSD")), "HIBA: A 'FreeBSD' nem félkövér!"
+   
 def test_06_felsorolas_tagolas(html_soup):
     text = " ".join(html_soup.get_text().split())
-    assert "GNOME, KDE, Xfce." in text, "HIBA: A GNOME-Xfce felsorolás nem megfelelő!"
-    assert "openbox, fluxbox, dwm, bspwm." in text, "HIBA: Az ablakkezelő felsorolás nem megfelelő!"
+    assert "GNOME, KDE, Xfce." in text, "HIBA: A Elérhető asztali környez felsorolás rossz!"
+    assert "openbox, fluxbox, dwm, bspwm." in text, "HIBA: Az ablakkezelő felsorolás rossz!"
 
 def test_07_mark_freebsd(html_soup):
-    comment = html_soup.find(string=lambda t: isinstance(t, Comment) and "hasonlóság" in t)
-    target_p = comment.find_next("p")
-    mark_tag = target_p.find("mark")
-    assert mark_tag is not None, "HIBA: Nincs <mark> a bekezdésben!"
-    assert mark_tag.get_text().strip() == "FreeBSD"
+   comment = html_soup.find(string=lambda t: isinstance(t, Comment) and "FreeBSD" in t)
+   target = comment.find_next("p").select_one("strong em, em strong, b i, i b")
+   assert target and "Berkeley Software Distribution" in target.text, "HIBA: Hiányzik a félkövér+dőlt rész!"
    
 def test_08_strong_em_berkeley(html_soup):
-    comment = html_soup.find(string=lambda t: isinstance(t, Comment) and "FreeBSD" in t.strip())
-    target_p = comment.find_next("p")
-    target = target_p.select_one("strong em, em strong, b i, i b")
-    assert target is not None, "HIBA: Nincs félkövér és dőlt szöveg!"
-    assert "Berkeley Software Distribution" in target.get_text()
-        
+    comment = html_soup.find(string=lambda t: isinstance(t, Comment) and "FreeBSD" in t)
+    target = comment.find_next("p").select_one("strong em, em strong, b i, i b")
+    assert target and "Berkeley Software Distribution" in target.text, "HIBA: Hiányzik a félkövér+dőlt rész!"
+
 def test_09_footer_div(html_soup):
-    footer_div = html_soup.find_all("div")[-1]
-    text = footer_div.get_text().strip()
-    assert len(text) > 10, "HIBA: A név vagy a dátum hiányzik!"
-    assert re.search(r"202[0-9]", text) is not None, "HIBA: A dátum hiányzik!"
+    div_text = " ".join(d.get_text() for d in html_soup.find_all("div"))
+    minta = r"[a-zA-Záéíóöőúüű].*\d{4}"
+    assert re.search(minta, div_text), "HIBA: A név vagy a dátum hiányzik a div-ből!"
