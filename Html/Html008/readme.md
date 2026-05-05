@@ -1,3 +1,6 @@
+# Feladat 007 - Ősz
+
+# Elvégzendő feladatok:
 1. Az adat.txt állomány tartalmát illessze a weboldal törzs részébe.
 2. Állítsa be a weboldal nyelvét magyarra.
 3. Állítsa be az oldal kódolását utf-8-ra.
