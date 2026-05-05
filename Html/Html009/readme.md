@@ -1,3 +1,6 @@
+# Feladat 009 - Had
+
+# Elvégzendő lépések:
 1. Készítsen egy weboldalt had.html néven.
 2. Állítsa be a weboldal nyelvét magyarra.
 3. Oldal kódolása legyen utf-8.
