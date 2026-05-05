@@ -49,6 +49,6 @@ def   test_08_gyümölcsérés_ideje_kiemelt(html_soup):
     p = html_soup.find(string=lambda t: isinstance(t, Comment) and "Érés" in t).find_next("p")
     assert p.find("mark", string="gyümölcsérés ideje"), "HIBA: A 'gyümölcsérés ideje' nincs mark-kal kiemelve az Érésnél!"
 
-def test_szoloszedes_erősen_megjelölt(html_soup):
+def test_09_szoloszedes_erősen_megjelölt(html_soup):
     p = html_soup.find(string=lambda t: isinstance(t, Comment) and "Szőlőszedés" in t).find_next("p")
     assert p.find("strong", string="hagyják kiforrni"), "HIBA: A 'hagyják kiforrni' nincs strong-gal jelölve a Szőlőszedésnél!"
